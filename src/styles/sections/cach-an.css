@@ -1,0 +1,202 @@
+/* ==========================================================================
+   CÁCH ĂN CHUẨN SECTION (cach-an.css)
+   ========================================================================== */
+
+.step-tabs-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  margin-bottom: 2.75rem;
+  flex-wrap: wrap;
+}
+
+.step-tab-btn {
+  background: var(--color-bg-card);
+  border: 1px solid var(--border-glass-hover);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-pill);
+  transition: all var(--trans-fast);
+  user-select: none;
+}
+
+.step-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.step-tab-btn.active {
+  background: var(--grad-primary);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 4px 18px rgba(255, 84, 30, 0.45);
+}
+
+/* Step Panel Container */
+.step-container-box {
+  background: #14151b;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-2xl);
+  padding: 3.25rem;
+  margin-bottom: 2.25rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+@media (max-width: 768px) {
+  .step-container-box {
+    padding: 2.25rem 1.5rem;
+  }
+}
+
+.step-content-panel {
+  display: none;
+  grid-template-columns: 1.25fr 0.75fr;
+  align-items: center;
+  gap: 3.5rem;
+}
+
+.step-content-panel.active {
+  display: grid;
+}
+
+@media (max-width: 900px) {
+  .step-content-panel {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+}
+
+.step-badge {
+  display: inline-block;
+  background: rgba(255, 84, 30, 0.1);
+  border: 1px solid rgba(255, 84, 30, 0.35);
+  color: var(--color-accent);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.15rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.step-title {
+  font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 1.15rem;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+.step-desc {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 1.75rem;
+}
+
+.step-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  padding: 0.95rem 1.25rem;
+  border-radius: var(--radius-md);
+  line-height: 1.5;
+}
+
+.step-tip-icon {
+  flex-shrink: 0;
+  font-weight: 800;
+}
+
+/* Step Graphic Card (Right) */
+.step-graphic-box {
+  background: #1a1c24;
+  border: 1px solid var(--border-glass-hover);
+  border-radius: var(--radius-xl);
+  padding: 2.25rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.step-graphic-art {
+  width: 150px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.35rem;
+}
+
+.step-graphic-art svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.45));
+}
+
+.step-graphic-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+}
+
+.step-graphic-sub {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+/* Banner Khung Giờ Vàng */
+.khung-gio-banner {
+  background: rgba(22, 23, 30, 0.8);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+.banner-clock-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  color: var(--color-accent-yellow);
+}
+
+.banner-clock-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+}
+
+.banner-text-content {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.banner-text-content strong {
+  color: var(--color-accent-yellow);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin-right: 0.45rem;
+}

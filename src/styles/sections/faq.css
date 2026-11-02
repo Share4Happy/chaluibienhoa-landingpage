@@ -1,0 +1,73 @@
+/* ==========================================================================
+   GIẢI ĐÁP THẮC MẮC - FAQ (faq.css)
+   ========================================================================== */
+
+.faq-list {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.faq-item {
+  background: #14151b;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--trans-fast), background var(--trans-fast), box-shadow var(--trans-fast);
+}
+
+.faq-item:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.faq-item.active {
+  border-color: rgba(255, 84, 30, 0.4);
+  background: #171821;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.faq-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.35rem 1.85rem;
+  text-align: left;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.4;
+  cursor: pointer;
+  user-select: none;
+}
+
+.faq-chevron {
+  width: 20px;
+  height: 20px;
+  stroke: var(--color-accent);
+  flex-shrink: 0;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-item.active .faq-chevron {
+  transform: rotate(180deg);
+}
+
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.35s;
+  padding: 0 1.85rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.faq-item.active .faq-content {
+  max-height: 280px;
+  padding-bottom: 1.5rem;
+}

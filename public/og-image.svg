@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e0f12"/>
+      <stop offset="50%" stop-color="#16171d"/>
+      <stop offset="100%" stop-color="#0a0b0d"/>
+    </linearGradient>
+    <radialGradient id="glowGrad" cx="70%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#ff541e" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ff541e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="flameGrad" x1="0%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" stop-color="#ff3b30"/>
+      <stop offset="50%" stop-color="#ff6b00"/>
+      <stop offset="100%" stop-color="#ffaa00"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#glowGrad)"/>
+
+  <!-- Border decor -->
+  <rect x="40" y="40" width="1120" height="550" rx="24" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="2"/>
+
+  <!-- Logo Flame Icon -->
+  <g transform="translate(100, 100)">
+    <rect width="80" height="80" rx="20" fill="#ff541e"/>
+    <path d="M40 14C40 14 50 28 50 36C50 39.5 48.5 42.5 46.5 45C45.5 39.5 41.5 36 37.5 36C33.5 36 31 39 31 42.5C31 50 37.5 54 37.5 60.5C37.5 63.5 35.5 66 33 67C26.5 64 22 57 22 49C22 35 34 23 40 14Z" fill="#ffffff"/>
+  </g>
+
+  <!-- Header / Badge -->
+  <text x="210" y="135" font-family="'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="800" fill="#ffffff" letter-spacing="2">CHÀ LỤI <tspan fill="#ff541e">LẠC HỒNG</tspan></text>
+  <text x="210" y="165" font-family="'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#9ca3af" letter-spacing="3">BIÊN HÒA FOOD REVIEWER</text>
+
+  <!-- Badge Pill -->
+  <rect x="100" y="240" width="460" height="42" rx="21" fill="rgba(255, 84, 30, 0.12)" stroke="rgba(255, 84, 30, 0.4)"/>
+  <circle cx="125" cy="261" r="5" fill="#ff541e"/>
+  <text x="145" y="267" font-family="'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#ff541e" letter-spacing="1">KIỂM CHỨNG &amp; REVIEW THỰC TẾ BỞI GEN Z</text>
+
+  <!-- Title -->
+  <text x="100" y="340" font-family="'Segoe UI', Roboto, sans-serif" font-size="52" font-weight="800" fill="#ffffff">MÓN "GÂY NGHIỆN"</text>
+  <text x="100" y="405" font-family="'Segoe UI', Roboto, sans-serif" font-size="52" font-weight="800" fill="#ff541e">SỐ 1 BIÊN HÒA</text>
+
+  <!-- Description -->
+  <text x="100" y="460" font-family="'Segoe UI', Roboto, sans-serif" font-size="20" fill="#d1d5db">Chả nướng than giòn rụm • Nước sốt tương thịt béo bùi • Xoài bào chua thanh</text>
+  <text x="100" y="495" font-family="'Segoe UI', Roboto, sans-serif" font-size="20" fill="#9ca3af">Đánh giá top quán chuẩn vị, bóc tách hương vị &amp; bí quyết cuốn chả chuẩn local.</text>
+
+  <!-- Stats Box -->
+  <g transform="translate(100, 525)">
+    <text x="0" y="25" font-family="'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800" fill="#fbbf24">★ 4.9/5</text>
+    <text x="90" y="25" font-family="'Segoe UI', Roboto, sans-serif" font-size="16" fill="#9ca3af">Đánh giá trung bình</text>
+    <text x="300" y="25" font-family="'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800" fill="#ffffff">15K - 25K</text>
+    <text x="420" y="25" font-family="'Segoe UI', Roboto, sans-serif" font-size="16" fill="#9ca3af">Giá sinh viên</text>
+  </g>
+
+  <!-- Right Visual Graphics Plate -->
+  <g transform="translate(820, 315)">
+    <ellipse cx="0" cy="0" rx="240" ry="140" fill="#1e2029" stroke="#333745" stroke-width="4"/>
+    <ellipse cx="0" cy="0" rx="210" ry="115" fill="#15161d"/>
+    <ellipse cx="0" cy="20" rx="80" ry="45" fill="#ff4d00" stroke="#ffedd5" stroke-width="3"/>
+    <text x="0" y="28" font-family="'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="800" fill="#ffffff" text-anchor="middle">SỐT TƯƠNG THỊT</text>
+  </g>
+</svg>
+
