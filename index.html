@@ -870,7 +870,7 @@
     </section>
 
     <!-- ========================================================================
-         SECTION 9: BÀI VIẾT NỔI BẬT - CAROUSEL TỰ ĐỘNG TRÔI (ẢNH BỔ SUNG 3 & MỤC 2B)
+         SECTION 9: BÀI VIẾT NỔI BẬT - CAROUSEL 4 THẺ (CATEGORY 220)
          ======================================================================== -->
     <section id="bai-viet" class="section posts-section">
       <div class="container">
@@ -879,25 +879,19 @@
             <span class="section-eyebrow">BÀI VIẾT</span>
             <h2 class="section-title">BÀI VIẾT &amp; TIN TỨC MỚI NHẤT</h2>
           </div>
-          <div class="posts-controls">
-            <button type="button" id="posts-toggle-btn" class="posts-toggle-play" aria-label="Tạm dừng chuyển động">
-              ⏸ Tạm dừng
-            </button>
-          </div>
         </div>
-      </div>
 
-      <!-- Carousel Full Width Track -->
-      <div class="posts-carousel-wrapper" aria-label="Danh sách bài viết mới">
-        <div id="posts-track" class="posts-track">
-          <!-- Skeleton Loading ban đầu -->
-          <article class="post-card skeleton" style="height: 220px;"></article>
-          <article class="post-card skeleton" style="height: 220px;"></article>
-          <article class="post-card skeleton" style="height: 220px;"></article>
-          <article class="post-card skeleton" style="height: 220px;"></article>
-          <article class="post-card skeleton" style="height: 220px;"></article>
+        <!-- Carousel giới hạn trong khu vực Container -->
+        <div class="posts-carousel-wrapper" aria-label="Danh sách bài viết mới">
+          <div id="posts-track" class="posts-track">
+            <!-- Skeleton Loading 4 thẻ ban đầu -->
+            <article class="post-card skeleton" style="height: 220px;"></article>
+            <article class="post-card skeleton" style="height: 220px;"></article>
+            <article class="post-card skeleton" style="height: 220px;"></article>
+            <article class="post-card skeleton" style="height: 220px;"></article>
+          </div>
+          <div id="posts-status" class="posts-status-msg" style="display: none;"></div>
         </div>
-        <div id="posts-status" class="posts-status-msg" style="display: none;"></div>
       </div>
     </section>
   </main>

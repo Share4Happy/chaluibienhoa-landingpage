@@ -24,10 +24,10 @@
 ## 2. KẾT QUẢ GỌI THỬ VÀ KIỂM TRA API WORDPRESS THỰC TẾ
 
 ### 2.1. Thông số Endpoint
-- **URL kiểm tra:** `https://share4happy.com/wp-json/wp/v2/posts?categories=208&per_page=5&_embed`
-- **Kết quả gọi:** HTTP Status `200 OK`.
-- **Số lượng bài trả về:** Đúng 5 bài viết mới nhất (IDs: `5310`, `5301`, `5272`, `5046`, `5072`).
-- **Chuyên mục:** "3D Print Studio" (ID 208).
+- **URL kiểm tra:** `https://share4happy.com/wp-json/wp/v2/posts?categories=220&per_page=4&_embed`
+- **Chuyên mục:** "Chả lụi Biên Hoà" (ID 220).
+- **Cấu hình hiển thị:** 4 thẻ bài viết chạy trôi chậm vô hạn bên trong phạm vi container, bỏ nút tạm dừng, hỗ trợ hover/touch pause.
+- **Cơ chế Fallback:** Khi chuyên mục 220 chưa có bài viết mới, tự động hiển thị 4 thẻ mẫu chuẩn chủ đề Chả Lụi Biên Hòa, liên kết dẫn về `https://share4happy.com/category/cha-lui-bien-hoa/`. Khi có bài mới trên WordPress, hệ thống tự động nhận diện và hiển thị bài thật.
 
 ### 2.2. Kiểm tra CORS
 - Đã test gửi request giả lập browser với header `Origin: https://localhost:5173` và `Origin: https://username.github.io`.

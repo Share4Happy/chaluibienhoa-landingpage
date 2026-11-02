@@ -1,6 +1,7 @@
 /**
  * WORDPRESS POSTS API & CAROUSEL (posts.js)
- * Mục 2B: Lấy 5 bài viết từ REST API và hiển thị dạng carousel trôi chậm vô hạn (marquee).
+ * Lấy các bài viết từ Category 220 (Chả lụi Biên Hoà).
+ * Tuyệt đối không dùng bài viết mẫu. Nếu chưa có bài thật, ẩn section an toàn.
  */
 
 import { CONFIG } from './config.js';
@@ -51,7 +52,7 @@ function normalizePost(raw) {
   }
 
   // Tên chuyên mục
-  let categoryName = 'ẨM THỰC ĐỊA PHƯƠNG';
+  let categoryName = 'CHẢ LỤI BIÊN HOÀ';
   const terms = raw._embedded?.['wp:term']?.[0];
   if (terms && terms.length > 0) {
     categoryName = terms[0].name.toUpperCase();
@@ -115,12 +116,12 @@ function createPostCardElement(post, isDuplicate = false) {
   const ctaRow = document.createElement('div');
   ctaRow.className = 'post-cta';
   
-  const ctaText = document.createElement('span');
-  ctaText.textContent = 'Đọc bài viết';
-  
   const ctaIcon = document.createElement('span');
   ctaIcon.className = 'post-cta-icon';
   ctaIcon.textContent = '▶';
+
+  const ctaText = document.createElement('span');
+  ctaText.textContent = 'Đọc bài viết';
 
   ctaRow.appendChild(ctaIcon);
   ctaRow.appendChild(ctaText);
@@ -131,15 +132,15 @@ function createPostCardElement(post, isDuplicate = false) {
 }
 
 /**
- * Khởi tạo Posts Carousel
+ * Khởi tạo Carousel từ WordPress REST API thật (Category 220)
  */
 export async function initPosts() {
+  const section = document.getElementById('bai-viet');
   const container = document.getElementById('posts-track');
   const statusContainer = document.getElementById('posts-status');
-  const togglePlayBtn = document.getElementById('posts-toggle-btn');
   const wrapper = document.querySelector('.posts-carousel-wrapper');
 
-  if (!container) return;
+  if (!container || !section) return;
 
   try {
     const res = await fetch(CONFIG.WP.API_URL);
@@ -148,27 +149,33 @@ export async function initPosts() {
     }
 
     const rawPosts = await res.json();
+
+    // Nếu không có bài viết nào từ API
     if (!Array.isArray(rawPosts) || rawPosts.length === 0) {
-      if (statusContainer) {
-        statusContainer.textContent = 'Chưa có bài viết mới nào.';
-        statusContainer.style.display = 'block';
-      }
+      // Ẩn section bài viết và liên kết menu khi chưa có bài thật trên WordPress
+      section.style.display = 'none';
+      const navPostLinks = document.querySelectorAll('a[href="#bai-viet"]');
+      navPostLinks.forEach(link => link.style.display = 'none');
       return;
     }
 
-    // Chuẩn hóa đúng 5 bài
+    // Đảm bảo section và link menu hiển thị khi có bài viết thật
+    section.style.display = '';
+    const navPostLinks = document.querySelectorAll('a[href="#bai-viet"]');
+    navPostLinks.forEach(link => link.style.display = '');
+
+    // Chuẩn hóa tối đa 4 bài
     const posts = rawPosts.slice(0, CONFIG.WP.POST_COUNT).map(normalizePost);
 
     // Xóa skeleton loading
     container.innerHTML = '';
     if (statusContainer) statusContainer.style.display = 'none';
 
-    // Tạo track card gốc
+    // Render các thẻ gốc
     const originalCards = posts.map(p => createPostCardElement(p, false));
     originalCards.forEach(card => container.appendChild(card));
 
-    // Duplicate đủ số lần để track phủ kín viewport lớn và chạy marquee vô hạn
-    // Mỗi vòng nhân 2 lần (tổng 15 cards)
+    // Duplicate các thẻ để chạy marquee lặp vô hạn
     for (let r = 0; r < 2; r++) {
       posts.forEach(p => {
         const dupCard = createPostCardElement(p, true);
@@ -176,48 +183,25 @@ export async function initPosts() {
       });
     }
 
-    // Bật hiệu ứng CSS marquee
+    // Bật animation marquee
     container.classList.add('is-running');
-
-    // Controls: Nút Tạm Dừng / Tiếp Tục
-    let isPaused = false;
-    if (togglePlayBtn) {
-      togglePlayBtn.addEventListener('click', () => {
-        isPaused = !isPaused;
-        if (isPaused) {
-          container.classList.add('is-paused');
-          togglePlayBtn.setAttribute('aria-label', 'Tiếp tục trôi');
-          togglePlayBtn.innerHTML = '▶ Phát';
-        } else {
-          container.classList.remove('is-paused');
-          togglePlayBtn.setAttribute('aria-label', 'Tạm dừng');
-          togglePlayBtn.innerHTML = '⏸ Tạm dừng';
-        }
-      });
-    }
 
     // Touch support cho thiết bị di động
     if (wrapper) {
-      let isTouching = false;
       wrapper.addEventListener('touchstart', () => {
-        isTouching = true;
         container.classList.add('is-paused');
       }, { passive: true });
 
       wrapper.addEventListener('touchend', () => {
-        isTouching = false;
-        if (!isPaused) {
-          container.classList.remove('is-paused');
-        }
+        container.classList.remove('is-paused');
       }, { passive: true });
     }
 
   } catch (err) {
-    console.warn('Không thể nạp bài viết WordPress:', err);
-    if (statusContainer) {
-      statusContainer.textContent = 'Không thể tải danh sách bài viết. Vui lòng thử lại sau.';
-      statusContainer.style.display = 'block';
-    }
+    console.warn('Không thể nạp bài viết WordPress từ Category 220:', err);
+    // Ẩn section khi có lỗi kết nối để không làm hỏng giao diện trang
+    section.style.display = 'none';
+    const navPostLinks = document.querySelectorAll('a[href="#bai-viet"]');
+    navPostLinks.forEach(link => link.style.display = 'none');
   }
 }
-
