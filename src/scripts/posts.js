@@ -1,7 +1,7 @@
 /**
  * WORDPRESS POSTS API & CAROUSEL (posts.js)
  * Lấy các bài viết từ Category 220 (Chả lụi Biên Hoà).
- * Tuyệt đối không dùng bài viết mẫu. Nếu chưa có bài thật, ẩn section an toàn.
+ * Nếu chưa có bài viết từ API: giữ nguyên section, để trống carousel và hiển thị text thông báo chờ có bài viết.
  */
 
 import { CONFIG } from './config.js';
@@ -132,15 +132,37 @@ function createPostCardElement(post, isDuplicate = false) {
 }
 
 /**
- * Khởi tạo Carousel từ WordPress REST API thật (Category 220)
+ * Render khối thông báo chờ bài viết
+ */
+function showEmptyPostsMessage(statusContainer) {
+  if (!statusContainer) return;
+  statusContainer.style.display = 'block';
+  statusContainer.innerHTML = `
+    <div class="posts-empty-box">
+      <div class="posts-empty-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+      </div>
+      <h3 class="posts-empty-title">Đang chờ cập nhật bài viết mới</h3>
+      <p class="posts-empty-desc">Chuyên mục Chả lụi Biên Hoà đang được chuẩn bị các bài viết chia sẻ ẩm thực mới nhất. Vui lòng quay lại sau!</p>
+    </div>
+  `;
+}
+
+/**
+ * Khởi tạo Carousel từ WordPress REST API (Category 220)
  */
 export async function initPosts() {
-  const section = document.getElementById('bai-viet');
   const container = document.getElementById('posts-track');
   const statusContainer = document.getElementById('posts-status');
   const wrapper = document.querySelector('.posts-carousel-wrapper');
 
-  if (!container || !section) return;
+  if (!container) return;
 
   try {
     const res = await fetch(CONFIG.WP.API_URL);
@@ -150,26 +172,23 @@ export async function initPosts() {
 
     const rawPosts = await res.json();
 
-    // Nếu không có bài viết nào từ API
+    // Nếu không có bài viết nào từ API: để trống và hiện text chờ có bài viết
     if (!Array.isArray(rawPosts) || rawPosts.length === 0) {
-      // Ẩn section bài viết và liên kết menu khi chưa có bài thật trên WordPress
-      section.style.display = 'none';
-      const navPostLinks = document.querySelectorAll('a[href="#bai-viet"]');
-      navPostLinks.forEach(link => link.style.display = 'none');
+      container.innerHTML = '';
+      container.style.display = 'none';
+      showEmptyPostsMessage(statusContainer);
       return;
     }
 
-    // Đảm bảo section và link menu hiển thị khi có bài viết thật
-    section.style.display = '';
-    const navPostLinks = document.querySelectorAll('a[href="#bai-viet"]');
-    navPostLinks.forEach(link => link.style.display = '');
+    // Khi có bài viết thật từ API:
+    container.style.display = 'flex';
+    if (statusContainer) statusContainer.style.display = 'none';
 
     // Chuẩn hóa tối đa 4 bài
     const posts = rawPosts.slice(0, CONFIG.WP.POST_COUNT).map(normalizePost);
 
     // Xóa skeleton loading
     container.innerHTML = '';
-    if (statusContainer) statusContainer.style.display = 'none';
 
     // Render các thẻ gốc
     const originalCards = posts.map(p => createPostCardElement(p, false));
@@ -199,9 +218,8 @@ export async function initPosts() {
 
   } catch (err) {
     console.warn('Không thể nạp bài viết WordPress từ Category 220:', err);
-    // Ẩn section khi có lỗi kết nối để không làm hỏng giao diện trang
-    section.style.display = 'none';
-    const navPostLinks = document.querySelectorAll('a[href="#bai-viet"]');
-    navPostLinks.forEach(link => link.style.display = 'none');
+    container.innerHTML = '';
+    container.style.display = 'none';
+    showEmptyPostsMessage(statusContainer);
   }
 }
